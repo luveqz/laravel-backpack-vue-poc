@@ -171,4 +171,6 @@ return [
      * 2. Replace the value of layout on this file with "your-custom-layout"
      * 3. Customize the blade and place components such as sidebar, header, top-bar, where you need them!
      */
+
+    'vite_scripts' => ['resources/js/app.js'],
 ];
