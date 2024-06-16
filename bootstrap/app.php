@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -10,10 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
-    )
-    ->withRouting(
-        api: __DIR__.'/../routes/api_v1.php',
-        apiPrefix: 'api/v1',
+        then: function () {
+            Route::middleware('api')
+                ->prefix('api/v1')
+                ->group(__DIR__.'/../routes/api_v1.php');
+        }
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
